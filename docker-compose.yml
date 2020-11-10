@@ -1,0 +1,16 @@
+  version: "3"
+  
+  services:
+    pingfederate:
+      container_name: pingfederate
+      build: .
+      environment: 
+        - "PING_IDENTITY_DEVOPS_USER=${PING_IDENTITY_DEVOPS_USER}"
+        - "PING_IDENTITY_DEVOPS_KEY=${PING_IDENTITY_DEVOPS_KEY}"
+        - PING_IDENTITY_ACCEPT_EULA=YES
+      volumes:
+        - ./pingfederate:/opt/in
+        - ./dist:/dist
+      ports:
+        - "9999:9999"
+        - "9031:9031"

@@ -1,0 +1,32 @@
+<html>
+  <body>
+    <h1>hello world from mycfm</h1>
+    
+    <iframe
+      id="central-facilitator"
+      src="https://fss.gecompany.com:9031/assets/custom-login/custom-login.html"
+    ></iframe>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const flowId = urlParams.get('flowId');
+
+      window.onload = () => {
+        window.addEventListener('message', (event) => {
+          console.log('receiving message');
+          console.log('event from iframe', event.data);
+          alert(event.data.status);
+        });
+
+        const centralFacilitator = document.getElementById(
+          'central-facilitator'
+        ).contentWindow;
+        centralFacilitator.postMessage(flowId, 'https://fss.gecompany.com:9031');
+      };
+
+      //   fetch(`https://fss.gecompany.com/start?flowId=${flowId}`, {
+      //       credentials: 'include'
+      //   });
+    </script>
+  </body>
+</html>

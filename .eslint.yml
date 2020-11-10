@@ -1,0 +1,26 @@
+extends:
+- airbnb-base
+env: 
+    mocha: true # this allows the linter to recognize mocha methods (decribe(), it(), etc.)
+rules:
+
+    # Enforce 4 spaces except for function parameters which should all left align with
+    # the first parameter if they are on separate lines.
+    # Resource: https://eslint.org/docs/rules/indent
+    indent: ['error', 4,
+        {
+            'FunctionDeclaration': {'parameters': 'first'},
+            'FunctionExpression': {'parameters': 'first'}
+        }
+    ]
+
+    # This doesn't solve the comment style that looks exactly like this:
+    # /**
+    #  * 
+    #  */
+    # Resource: https://eslint.org/docs/rules/multiline-comment-style#enforce-a-particular-style-for-multiline-comments-multiline-comment-style
+    multiline-comment-style: ['error', 'separate-lines']
+
+    # I haven't added import rules like ordering because there is more than one exception.
+    # We might want to just manually check import ordering and grouping.
+    # Resource: https://eslint.org/docs/rules/sort-imports

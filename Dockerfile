@@ -1,0 +1,32 @@
+#FROM pingidentity/pingfederate:10.1.0-alpine-edge
+FROM pingidentity/pingfederate:9.3.3
+
+ENV PING_PRODUCT="PingFederate"
+
+ENV LICENSE_DIR="${SERVER_ROOT_DIR}/server/default/conf"
+
+ENV LICENSE_FILE_NAME="pingfederate.lic"
+
+ENV LICENSE_SHORT_NAME="PF"
+
+ENV LICENSE_VERSION=${LICENSE_VERSION}
+
+ENV OPERATIONAL_MODE="STANDALONE"
+
+ENV CLUSTER_BIND_ADDRESS="NON_LOOPBACK"
+
+ENV STARTUP_COMMAND="${SERVER_ROOT_DIR}/bin/run.sh"
+
+ENV TAIL_LOG_FILES=${SERVER_ROOT_DIR}/log/server.log
+
+ENV PF_ENGINE_DEBUG=false
+
+ENV PF_ADMIN_DEBUG=false
+
+ENV PF_DEBUG_PORT=9030
+
+ENV PF_ADMIN_PORT=9999
+
+ENV PF_ENGINE_PORT=9031
+
+COPY ./80-post-start.sh /opt/staging/hooks/80-post-start.sh
