@@ -22,3 +22,10 @@ requirements:
 
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
 
+
+
+to get stupid x-frame-header to go away
+* start container and bind /opt/out directory to local filesystem
+* open the response-headers-xml file thing
+* change settings
+* docker restart pingfederate

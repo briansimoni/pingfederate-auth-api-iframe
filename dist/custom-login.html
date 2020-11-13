@@ -1,31 +1,42 @@
 <html>
-    <body>
-        <small>make me invisible</small>
-        <script>
-            async function getFlowIdResponse(flowId) {
-                const response = await fetch(`https://fss.gecompany.com:9031/pf-ws/authn/flows/${flowId}`, {
-                    headers: {
-                    'X-XSRF-Header': 'PingFederate',
-                    },
-                    credentials: 'include',
-                });
-
-                if (!response.ok) {
-                    const text = await response.text();
-                    throw new Error(text);
-                }
-
-                return response.json()
+  <body>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/promise-polyfill/8.2.0/polyfill.min.js"
+      integrity="sha512-YK+bAjUuYdjPksbGQIIIsUn5hgYFsc+nXgx21Wwby9Mv+rJd8WZH2FRe1RdlTjFu1vxlGia9/RqmUMcZtX+BrA=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/fetch-polyfill@0.8.2/fetch.js"></script>
+    <small>make me invisible</small>
+    <script>
+      function getFlowIdResponse(flowId) {
+        return new Promise(function(resolve) {
+          fetch('https://fss.gecompany.com:9031/pf-ws/authn/flows/' + flowId, {
+            headers: {
+              'X-XSRF-Header': 'PingFederate',
+            },
+            credentials: 'include',
+          }).then(function (response) {
+            if (!response.ok) {
+              // var text = await response.text();
+              throw new Error('something went wrong');
             }
 
-            window.addEventListener('message', async (event) => {
-                const flowId = event.data;
-                const flowIdGet = await getFlowIdResponse(flowId);
-
-                console.log(flowIdGet);
-                console.log('sending message');
-                window.parent.postMessage(flowIdGet, '*')
+            response.json().then(function(j) {
+                resolve(j);
             })
-        </script>
-    </body>
+          });
+        });
+      }
+
+      window.addEventListener('message', function (event) {
+        var flowId = event.data;
+        alert(flowId);
+        getFlowIdResponse(flowId).then(function (nextStep) {
+          console.log(nextStep);
+          console.log('sending message');
+          window.parent.postMessage(nextStep, '*');
+        });
+      });
+    </script>
+  </body>
 </html>

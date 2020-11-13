@@ -10,6 +10,7 @@
         - PING_IDENTITY_ACCEPT_EULA=YES
       volumes:
         - ./pingfederate:/opt/in
+        - ./pingfederate-out:/opt/out
         - ./dist:/dist
       ports:
         - "9999:9999"

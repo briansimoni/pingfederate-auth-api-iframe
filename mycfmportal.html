@@ -8,17 +8,20 @@
     ></iframe>
 
     <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const flowId = urlParams.get('flowId');
 
-      window.onload = () => {
-        window.addEventListener('message', (event) => {
+      
+      // var urlParams = new URLSearchParams(window.location.search);
+      // var flowId = urlParams.get('flowId');
+      var flowId = window.location.search.substring(8,15);
+
+      window.onload = function() {
+        window.addEventListener('message', function(event) {
           console.log('receiving message');
           console.log('event from iframe', event.data);
           alert(event.data.status);
         });
 
-        const centralFacilitator = document.getElementById(
+        var centralFacilitator = document.getElementById(
           'central-facilitator'
         ).contentWindow;
         centralFacilitator.postMessage(flowId, 'https://fss.gecompany.com:9031');

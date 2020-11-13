@@ -15,7 +15,7 @@ const server = https.createServer({
   cert: fs.readFileSync('./cert.pem'),
 }, app);
 
-server.listen(8080, () => {
+server.listen(8080, '0.0.0.0', () => {
   console.log('server listenting on 8080');
 });
 

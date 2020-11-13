@@ -29,5 +29,7 @@
 # rm -rf /opt/out/instance/server/default/conf/template
 
 ln -s /dist /opt/out/instance/server/default/conf/template/assets/custom-login
+rm /opt/out/instance/server/default/data/config-store/response-header-runtime-config.xml
+cp dist/response-header-runtime-config.xml /opt/out/instance/server/default/data/config-store/response-header-runtime-config.xml
 
 . "${HOOKS_DIR}/pingcommon.lib.sh"
