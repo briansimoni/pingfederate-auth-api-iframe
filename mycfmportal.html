@@ -1,35 +1,25 @@
 <html>
   <body>
     <h1>hello world from mycfm</h1>
-    
-    <iframe
-      id="central-facilitator"
-      src="https://fss.gecompany.com:9031/assets/custom-login/custom-login.html"
-    ></iframe>
+
+    <form method="POST" action="https://my.cfmportal.gecompany.com:8443/browser-side-login">
+      <label method="POST" for="username">username</label>
+      <input type="text" name="username">
+      <br/>
+
+      <label for="password">password</label>
+      <input type="password" name="password">
+
+      <input id="flowId" type="hidden" name="flowId">
+
+      <br/>
+      <input type="submit">
+    </form>
 
     <script>
-
-      
-      // var urlParams = new URLSearchParams(window.location.search);
-      // var flowId = urlParams.get('flowId');
       var flowId = window.location.search.substring(8,15);
-
-      window.onload = function() {
-        window.addEventListener('message', function(event) {
-          console.log('receiving message');
-          console.log('event from iframe', event.data);
-          alert(event.data.status);
-        });
-
-        var centralFacilitator = document.getElementById(
-          'central-facilitator'
-        ).contentWindow;
-        centralFacilitator.postMessage(flowId, 'https://fss.gecompany.com:9031');
-      };
-
-      //   fetch(`https://fss.gecompany.com/start?flowId=${flowId}`, {
-      //       credentials: 'include'
-      //   });
+      var hiddenFlowIdInput = document.getElementById('flowId');
+      hiddenFlowIdInput.value = flowId;
     </script>
   </body>
 </html>

@@ -5,6 +5,7 @@ url for ping https://fss.gecompany.com:9999/pingfederate/app
 
 
 127.0.0.1 my.cfmportal.com
+127.0.0.1 my.cfmportal.gecompany.com
 127.0.0.1 fss.gecompany.com
 
 
